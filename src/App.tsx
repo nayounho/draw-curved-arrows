@@ -1,26 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import DrawCurvedArrows from "./draw-curved-arrows/DrawCurvedArrows";
+import { Stores } from "./draw-curved-arrows/type";
+import { mockData } from "./mockData";
+
+const imgUrl = "http://3.36.33.116/assets/jdc-stores-sample.png";
+const stores = mockData.store as unknown as Stores;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <DrawCurvedArrows imgUrl={imgUrl} stores={stores} />;
 }
 
 export default App;
