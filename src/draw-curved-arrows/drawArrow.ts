@@ -20,6 +20,8 @@ export function drawArrow(
   const arrowGap = firstStoreSize + lineWidth * 2.5;
   const borderArrowAddGap = 2;
 
+  // console.log("start");
+
   if (ctx) {
     // border arrow
     ctx.lineWidth = lineWidth + 4;
@@ -57,7 +59,6 @@ export function drawArrow(
     ctx.rotate(angle);
 
     // Line
-    // ctx.clearRect(0, 0, 1300, 600);
     ctx.strokeStyle = secondary
       ? "rgba(255, 99, 132, 1)"
       : "rgba(54, 162, 235, 1)";
@@ -87,4 +88,5 @@ export function drawArrow(
 
     return { angle, translate: [x0, y0], lineWidth, path: line };
   }
+  // console.log("end");
 }

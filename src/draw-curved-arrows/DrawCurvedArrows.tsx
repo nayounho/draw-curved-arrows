@@ -74,7 +74,7 @@ const DrawCurvedArrows = ({
     const img = new Image();
 
     img.onload = () => {
-      // ctx.clearRect(0, 0, canvasSize.width + 100, canvasSize.height + 200);
+      ctx.clearRect(0, 0, canvasSize.width + 100, canvasSize.height + 200);
       const { width, height } = img;
       setCanvasSize({ width, height });
       ctx.drawImage(img, 30, 130);
@@ -223,8 +223,9 @@ const DrawCurvedArrows = ({
         });
       }
     };
+    console.log(12);
     img.src = imgUrl;
-  }, [selectedStores, stores]);
+  }, [selectedStores, stores, canvasSize.height]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
