@@ -1,7 +1,7 @@
 import { drawArrow } from "./drawArrow";
 import { arrowSize, marketSize } from "./movementSize";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
-import styles from "./DrawCurvedArrow.module.scss";
+// import styles from "./DrawCurvedArrow.module.scss";
 import { Stores } from "./type";
 
 const DrawCurvedArrows = ({
@@ -48,6 +48,8 @@ const DrawCurvedArrows = ({
     const { id } = e.currentTarget;
 
     const matchStore = stores.find((store) => store.name === id);
+    console.log(selectedStores);
+
     if (!(id && matchStore)) return;
     if (selectedStores.find((store) => store.name === matchStore.name)) {
       setSelectedStores(
@@ -263,7 +265,7 @@ const DrawCurvedArrows = ({
   return (
     <>
       <button onClick={selectedStoresResetHandler}>RESET</button>
-      <div className={styles.canvasWrapper}>
+      <div style={{ position: "relative" }}>
         <canvas
           id="canvas"
           ref={canvasRef}
@@ -280,13 +282,13 @@ const DrawCurvedArrows = ({
             return (
               <li
                 id={store.name}
-                className={
-                  styles.storeList +
-                  " " +
-                  (selectedStores.find((v) => v.name === store.name)
-                    ? styles.active
-                    : "")
-                }
+                // className={
+                //   styles.storeList +
+                //   " " +
+                //   (selectedStores.find((v) => v.name === store.name)
+                //     ? styles.active
+                //     : "")
+                // }
                 key={store.name}
                 onClick={setSelectedStoresHandler}
                 style={{
@@ -294,6 +296,22 @@ const DrawCurvedArrows = ({
                   top: `${store.coodinate[1] - halfStoreSize}px`,
                   width: `${storeSize}px`,
                   height: `${storeSize}px`,
+                  position: "absolute",
+                  borderRadius: "50%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  backgroundColor: `${
+                    selectedStores.find(({ name }) => name === store.name)
+                      ? "#3265e6"
+                      : "#f2effb"
+                  } `,
+                  color: `${
+                    selectedStores.find(({ name }) => name === store.name)
+                      ? "#f2effb"
+                      : "black"
+                  } `,
                 }}
               >
                 {store.name}
