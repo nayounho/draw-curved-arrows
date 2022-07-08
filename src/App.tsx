@@ -1,12 +1,12 @@
 import DrawCurvedArrows from "./draw-curved-arrows/DrawCurvedArrows";
 import { Stores } from "./draw-curved-arrows/type";
 import { mockData } from "./mockData";
+import imageUrl from "./assets/jdc-stores-sample.png";
 
-const imgUrl = "http://3.36.33.116/assets/jdc-stores-sample.png";
 const stores = mockData.store as unknown as Stores;
 
 function App() {
-  return <DrawCurvedArrows imgUrl={imgUrl} stores={stores} />;
+  return <DrawCurvedArrows imgUrl={imageUrl} stores={stores} />;
 }
 
 export default App;

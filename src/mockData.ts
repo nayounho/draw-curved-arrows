@@ -3,7 +3,7 @@ export const mockData = {
   store: [
     {
       name: "만다리나덕",
-      coodinate: [145, 260],
+      coodinate: [135, 250],
       movement: {
         베트리나: 369,
         쌤소나이트: 468,
@@ -21,7 +21,7 @@ export const mockData = {
     },
     {
       name: "베트리나",
-      coodinate: [350, 260],
+      coodinate: [325, 250],
       movement: {
         만다리나덕: 352,
         쌤소나이트: 468,
@@ -39,7 +39,7 @@ export const mockData = {
     },
     {
       name: "쌤소나이트",
-      coodinate: [555, 260],
+      coodinate: [515, 250],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -57,7 +57,7 @@ export const mockData = {
     },
     {
       name: "헤지스",
-      coodinate: [815, 260],
+      coodinate: [755, 250],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -75,7 +75,7 @@ export const mockData = {
     },
     {
       name: "컨티뉴",
-      coodinate: [1025, 260],
+      coodinate: [950, 250],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -93,7 +93,7 @@ export const mockData = {
     },
     {
       name: "쿠론",
-      coodinate: [1230, 260],
+      coodinate: [1130, 250],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -111,7 +111,7 @@ export const mockData = {
     },
     {
       name: "키플링",
-      coodinate: [145, 545],
+      coodinate: [130, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -129,7 +129,7 @@ export const mockData = {
     },
     {
       name: "이치",
-      coodinate: [350, 545],
+      coodinate: [325, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -147,7 +147,7 @@ export const mockData = {
     },
     {
       name: "캉골",
-      coodinate: [555, 545],
+      coodinate: [515, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -165,7 +165,7 @@ export const mockData = {
     },
     {
       name: "제이에스티나",
-      coodinate: [815, 545],
+      coodinate: [755, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -183,7 +183,7 @@ export const mockData = {
     },
     {
       name: "로즈앤라운지",
-      coodinate: [1025, 545],
+      coodinate: [950, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,
@@ -201,7 +201,7 @@ export const mockData = {
     },
     {
       name: "조이그라이슨",
-      coodinate: [1230, 545],
+      coodinate: [1130, 535],
       movement: {
         만다리나덕: 352,
         베트리나: 468,

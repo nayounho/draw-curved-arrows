@@ -1,7 +1,6 @@
 import { drawArrow } from "./drawArrow";
 import { arrowSize, marketSize } from "./movementSize";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
-// import styles from "./DrawCurvedArrow.module.scss";
 import { Stores } from "./type";
 
 const DrawCurvedArrows = ({
@@ -42,13 +41,17 @@ const DrawCurvedArrows = ({
     x: 0,
     y: 0,
   });
+  const [tooltipData, settooltipData] = useState({
+    total: 0,
+    x: 0,
+    y: 0,
+  });
   const [displayMovement, setDisplayMovement] = useState(false);
 
   const setSelectedStoresHandler: MouseEventHandler<HTMLLIElement> = (e) => {
     const { id } = e.currentTarget;
 
     const matchStore = stores.find((store) => store.name === id);
-    console.log(selectedStores);
 
     if (!(id && matchStore)) return;
     if (selectedStores.find((store) => store.name === matchStore.name)) {
@@ -76,7 +79,7 @@ const DrawCurvedArrows = ({
     const img = new Image();
 
     img.onload = () => {
-      ctx.clearRect(0, 0, canvasSize.width + 100, canvasSize.height + 200);
+      ctx.clearRect(0, 0, canvasSize.width + 100, canvasSize.height + 300);
       const { width, height } = img;
       setCanvasSize({ width, height });
       ctx.drawImage(img, 30, 130);
@@ -152,9 +155,7 @@ const DrawCurvedArrows = ({
           ]);
         });
       } else {
-        const renderStores = selectedStores.length
-          ? selectedStores.reverse()
-          : stores;
+        const renderStores = selectedStores.reverse();
         renderStores.forEach((firstStore, i) => {
           renderStores.forEach((secondStore, j) => {
             if (i <= j) return;
@@ -225,7 +226,6 @@ const DrawCurvedArrows = ({
         });
       }
     };
-    console.log(12);
     img.src = imgUrl;
   }, [selectedStores, stores, canvasSize.height]);
 
@@ -264,14 +264,25 @@ const DrawCurvedArrows = ({
 
   return (
     <>
-      <button onClick={selectedStoresResetHandler}>RESET</button>
       <div style={{ position: "relative" }}>
         <canvas
           id="canvas"
           ref={canvasRef}
           width={canvasSize.width + 100} // 화살표가 밖으로 나가서 임시로 값 추가
-          height={canvasSize.height + 200} // 화살표가 밖으로 나가서 임시로 값 추가
+          height={canvasSize.height + 300} // 화살표가 밖으로 나가서 임시로 값 추가
         ></canvas>
+        <button
+          onClick={selectedStoresResetHandler}
+          style={{
+            position: "absolute",
+            left: "1150px",
+            top: "100px",
+            zIndex: 0,
+            padding: "5px 10px",
+          }}
+        >
+          RESET
+        </button>
         <ul>
           {stores.map((store) => {
             const { storeSize, halfStoreSize } = marketSize(
@@ -280,42 +291,48 @@ const DrawCurvedArrows = ({
             );
 
             return (
-              <li
-                id={store.name}
-                // className={
-                //   styles.storeList +
-                //   " " +
-                //   (selectedStores.find((v) => v.name === store.name)
-                //     ? styles.active
-                //     : "")
-                // }
-                key={store.name}
-                onClick={setSelectedStoresHandler}
-                style={{
-                  left: `${store.coodinate[0] - halfStoreSize}px`,
-                  top: `${store.coodinate[1] - halfStoreSize}px`,
-                  width: `${storeSize}px`,
-                  height: `${storeSize}px`,
-                  position: "absolute",
-                  borderRadius: "50%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  cursor: "pointer",
-                  backgroundColor: `${
-                    selectedStores.find(({ name }) => name === store.name)
-                      ? "#3265e6"
-                      : "#f2effb"
-                  } `,
-                  color: `${
-                    selectedStores.find(({ name }) => name === store.name)
-                      ? "#f2effb"
-                      : "black"
-                  } `,
-                }}
-              >
-                {store.name}
-              </li>
+              <>
+                <li
+                  id={store.name}
+                  key={store.name}
+                  onClick={setSelectedStoresHandler}
+                  onMouseMove={({ nativeEvent: { offsetX, offsetY } }) => {
+                    settooltipData({
+                      total: store.total,
+                      x: offsetX + store.coodinate[0] - halfStoreSize,
+                      y: offsetY + store.coodinate[1] - halfStoreSize,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    settooltipData({ total: 0, x: 0, y: 0 });
+                  }}
+                  style={{
+                    left: `${store.coodinate[0] - halfStoreSize}px`,
+                    top: `${store.coodinate[1] - halfStoreSize}px`,
+                    width: `${storeSize}px`,
+                    height: `${storeSize}px`,
+                    position: "absolute",
+                    borderRadius: "50%",
+                    display: "flex",
+                    flexFlow: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    backgroundColor: `${
+                      selectedStores.find(({ name }) => name === store.name)
+                        ? "#3265e6"
+                        : " #f2effb"
+                    } `,
+                    color: `${
+                      selectedStores.find(({ name }) => name === store.name)
+                        ? "#f2effb"
+                        : "black"
+                    } `,
+                  }}
+                >
+                  {store.name}
+                </li>
+              </>
             );
           })}
         </ul>
@@ -332,8 +349,20 @@ const DrawCurvedArrows = ({
           {renderData.startStore +
             " -> " +
             renderData.endStore +
-            "/" +
+            " / " +
             renderData.movement}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: tooltipData.y + 10 + "px",
+            left: tooltipData.x + 10 + "px",
+            backgroundColor: "black",
+            color: "white",
+            display: tooltipData.total ? "block" : "none",
+          }}
+        >
+          {tooltipData.total}
         </div>
       </div>
     </>

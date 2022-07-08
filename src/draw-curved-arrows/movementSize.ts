@@ -15,8 +15,8 @@ export const arrowSize = (size: number, maxSize: number) => {
 };
 
 export const marketSize = (movement: number, maxMovement: number) => {
-  const MAX_CIRCLE_SIZE = 180;
-  const MIN_CIRCLE_SIZE = 90;
+  const MAX_CIRCLE_SIZE = 150;
+  const MIN_CIRCLE_SIZE = 75;
 
   const storeSize = Math.ceil(
     (MAX_CIRCLE_SIZE - MIN_CIRCLE_SIZE) * (movement / maxMovement) +
